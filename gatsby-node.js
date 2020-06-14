@@ -17,6 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 strapiId
                 menus {
                   id
+                  owner
                 }
               }
             }
@@ -48,7 +49,8 @@ exports.createPages = async ({ graphql, actions }) => {
             component: require.resolve("./src/templates/menu.js"),
             context: {
               id: menu.id,
-              restId: restaurant.node.strapiId
+              restId: restaurant.node.strapiId,
+              ownerId: menu.owner
             },
           })
         })

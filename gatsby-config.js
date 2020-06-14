@@ -18,6 +18,20 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Nulogg Restaurants and Menus`,
+        short_name: `Nulogg`,
+        start_url: `/`,
+        background_color: `#6b37bf`,
+        theme_color: `#6b37bf`,
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: `standalone`,
+        // icon: `src/images/icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
       resolve: "gatsby-source-strapi",
       options: {
         apiURL: process.env.API_URL || "http://localhost:1337",
@@ -25,6 +39,7 @@ module.exports = {
           // List of the Content Types you want to be able to request from Gatsby.
           "restaurant",
           "menu",
+          "menuitem"
         ],
         queryLimit: 1000,
       },

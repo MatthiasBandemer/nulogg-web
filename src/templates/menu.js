@@ -5,9 +5,10 @@ import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
 import Layout from "../components/layout"
+import MenuItems from "../components/menuitems"
 
 export const query = graphql`
-  query MenuQuery($id: Int!, $restId: Int!) {
+  query MenuQuery($id: Int!, $restId: Int!, $ownerId: Int!) {
     strapiMenu(strapiId: { eq: $id }) {
       strapiId
       name
@@ -27,12 +28,37 @@ export const query = graphql`
           publicURL
       }
     }
+    allStrapiMenuitem(filter: {owner: {id: {eq: $ownerId}}}) {
+      edges {
+        node {
+          owner { 
+            id 
+            username 
+          }
+          baseprice
+          currency 
+          category {
+            id
+          }
+          serving {
+            id
+            name
+            description
+            image {
+              publicURL
+            }
+          }
+        }
+      }
+    }
   }
 `
 
 const Menu = ({ data }) => {
   const menu = data.strapiMenu
   const restaurant = data.strapiRestaurant
+  const menuitemsall = data.allStrapiMenuitem.edges
+
   return (
     <Layout>
       <div>
@@ -63,6 +89,7 @@ const Menu = ({ data }) => {
                             <div>
                                 <h3 className="uk-heading-line uk-text-center"><span>{category.name}</span></h3>
                                 <p className="uk-text-italic">{category.description}</p>
+                                <MenuItems categoryId={category.id} menuitems={menuitemsall} />
                             </div>
                         )
                     })}
