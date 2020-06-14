@@ -21,6 +21,15 @@ const Restaurants = ({ restaurants }) => {
                         <p id="description">
                             <ReactMarkdown source={restaurant.node.description} />
                         </p>
+                        <ul className="uk-list-disc" data-uk-list>
+                            { restaurant.node.menus.map((menu, n) => {
+                                return (
+                                    <li>
+                                        <Link to={`/restaurant/${restaurant.node.strapiId}/menu/${menu.id}`} className="uk-link-reset">{menu.name}</Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     </div>
                 </div>
             </Link>)

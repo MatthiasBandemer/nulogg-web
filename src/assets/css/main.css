@@ -4,7 +4,7 @@ a {
   
   h1 {
     font-family: Staatliches !important;
-    font-size: 120px !important;
+    font-size: 70px !important;
   }
   
   #category {
@@ -21,7 +21,7 @@ a {
   
   #banner {
     margin: 20px !important;
-    height: 800px !important;
+    height: 300px !important;
   }
   
   #editor {

@@ -34,7 +34,6 @@ const Restaurant = ({ data }) => {
         >
           <h1>{restaurant.name}</h1>
         </div>
-
         <div className="uk-section">
           <div className="uk-container uk-container-small">
             <ReactMarkdown source={restaurant.description} />

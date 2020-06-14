@@ -26,6 +26,7 @@ const IndexPage = () => (
                 menus {
                   id
                   name
+                  description
                 }
               }
             }

@@ -15,6 +15,9 @@ exports.createPages = async ({ graphql, actions }) => {
             edges {
               node {
                 strapiId
+                menus {
+                  id
+                }
               }
             }
           }
@@ -26,9 +29,11 @@ exports.createPages = async ({ graphql, actions }) => {
       throw result.errors
     }
   
-    // Create restaurant pages.
+    // Create restaurant and menu pages.
     const restaurants = result.data.restaurants.edges
+  
     restaurants.forEach((restaurant, index) => {
+
       createPage({
         path: `/restaurant/${restaurant.node.strapiId}`,
         component: require.resolve("./src/templates/restaurant.js"),
@@ -36,5 +41,16 @@ exports.createPages = async ({ graphql, actions }) => {
           id: restaurant.node.strapiId,
         },
       })
+
+      restaurant.node.menus.forEach((menu, index) => {
+          createPage({
+            path: `/restaurant/${restaurant.node.strapiId}/menu/${menu.id}`,
+            component: require.resolve("./src/templates/menu.js"),
+            context: {
+              id: menu.id,
+              restId: restaurant.node.strapiId
+            },
+          })
+        })
     })
   }
