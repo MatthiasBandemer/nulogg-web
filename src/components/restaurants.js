@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import ReactMarkdown from "react-markdown"
 
 const Restaurants = ({ restaurants }) => {
 
@@ -18,7 +19,7 @@ const Restaurants = ({ restaurants }) => {
                             {restaurant.node.name}
                         </h3>
                         <p id="description">
-                            {restaurant.node.description}
+                            <ReactMarkdown source={restaurant.node.description} />
                         </p>
                     </div>
                 </div>
